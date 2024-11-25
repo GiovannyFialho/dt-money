@@ -4,10 +4,6 @@ export const TransactionsContainer = styled.main`
   width: 100%;
   max-width: 1120px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   margin: 4rem auto 0;
   padding: 0 1.5rem;
 `;
