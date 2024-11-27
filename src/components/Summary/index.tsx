@@ -5,6 +5,8 @@ import { TransactionContext } from "@/contexts/TransactionsContext";
 
 import { defaultTheme } from "@/styles/themes/default";
 
+import { priceFormatter } from "@/utils/formatter";
+
 import { SummaryCard, SummaryContainer } from "@/components/Summary/styles";
 
 export function Summary() {
@@ -34,7 +36,7 @@ export function Summary() {
           <ArrowCircleUp size={32} color={defaultTheme["green-300"]} />
         </header>
 
-        <strong>{summary.icome}</strong>
+        <strong>{priceFormatter.format(summary.icome)}</strong>
       </SummaryCard>
 
       <SummaryCard>
@@ -44,7 +46,7 @@ export function Summary() {
           <ArrowCircleDown size={32} color={defaultTheme["red-300"]} />
         </header>
 
-        <strong>{summary.outcome}</strong>
+        <strong>{priceFormatter.format(summary.outcome)}</strong>
       </SummaryCard>
 
       <SummaryCard variant="green">
@@ -54,7 +56,7 @@ export function Summary() {
           <CurrencyDollar size={32} color={defaultTheme.white} />
         </header>
 
-        <strong>{summary.total}</strong>
+        <strong>{priceFormatter.format(summary.total)}</strong>
       </SummaryCard>
     </SummaryContainer>
   );
