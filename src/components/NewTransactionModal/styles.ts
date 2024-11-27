@@ -30,8 +30,10 @@ export const Content = styled(Dialog.Content)`
     margin-top: 2rem;
 
     input {
+      width: 100%;
       color: ${(props) => props.theme["gray-300"]};
 
+      margin-bottom: 1rem;
       padding: 1rem;
       border: 0;
       border-radius: 6px;
@@ -55,12 +57,32 @@ export const Content = styled(Dialog.Content)`
       border-radius: 6px;
       background: ${(props) => props.theme["green-500"]};
 
-      &:hover {
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      &:not(:disabled):hover {
         background: ${(props) => props.theme["green-700"]};
         transition: all 0.2s ease-in-out;
       }
     }
   }
+`;
+
+export const ContainerField = styled.div`
+  flex: 1;
+  position: relative;
+`;
+
+export const ErrorText = styled.span`
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0;
+
+  font-size: 0.75rem;
+  line-height: 0;
+  color: ${(props) => props.theme["red-300"]};
 `;
 
 export const CloseButton = styled(Dialog.Close)`

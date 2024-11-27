@@ -1,13 +1,44 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlass } from "phosphor-react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { SearchFormContainer } from "@/pages/Transactions/components/SearchForm/styles";
+import {
+  ContainerField,
+  ErrorText,
+  SearchFormContainer
+} from "@/pages/Transactions/components/SearchForm/styles";
+
+const searchFormSchema = z.object({
+  query: z.string().min(1, "Este campo é obrigatório")
+});
+
+type SearchFormInputs = z.infer<typeof searchFormSchema>;
 
 export function SearchForm() {
-  return (
-    <SearchFormContainer>
-      <input type="text" placeholder="Busque por transações" />
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm<SearchFormInputs>({
+    resolver: zodResolver(searchFormSchema)
+  });
 
-      <button type="submit">
+  async function handleSearchTransactions(data: SearchFormInputs) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    console.log(data);
+  }
+
+  return (
+    <SearchFormContainer onSubmit={handleSubmit(handleSearchTransactions)}>
+      <ContainerField>
+        <input type="text" placeholder="Busque por transações" {...register("query")} />
+
+        <ErrorText>{errors.query?.message}</ErrorText>
+      </ContainerField>
+
+      <button type="submit" disabled={isSubmitting}>
         <MagnifyingGlass size={20} />
         Buscar
       </button>
