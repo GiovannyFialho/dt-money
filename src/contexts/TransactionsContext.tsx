@@ -34,6 +34,14 @@ interface TransactionProviderProps {
 export function TransactionProvider({ children }: TransactionProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
+  /*
+   * Ao utilizar o useCallback, podemos controlar quando uma função será recriada.
+   * No uso deste provider (fetchTransactions e createTransaction) o array de dependencias
+   * está vazio, portanto iremos criar as duas função apenas uma vez.
+   * Mas se quiseremos recriar as funções com base em alguma informação de dentro do Provider,
+   * deveremos passar essa informação para o array de dependencias, assim a função será recriada.
+   */
+
   const fetchTransactions = useCallback(async (query?: string) => {
     const response = await api.get("transactions", {
       params: {
@@ -62,7 +70,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
 
   useEffect(() => {
     fetchTransactions();
-  }, []);
+  }, [fetchTransactions]);
 
   return (
     <TransactionContext.Provider
