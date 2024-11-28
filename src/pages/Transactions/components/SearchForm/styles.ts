@@ -51,18 +51,3 @@ export const SearchFormContainer = styled.form`
     }
   }
 `;
-
-export const ContainerField = styled.div`
-  flex: 1;
-  position: relative;
-`;
-
-export const ErrorText = styled.span`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-
-  font-size: 0.75rem;
-  line-height: 0;
-  color: ${(props) => props.theme["red-300"]};
-`;
